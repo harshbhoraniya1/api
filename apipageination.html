@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- html code start here -->
+    <input type="text" id="pagesize">
+    <button onclick="abc()">page size</button>
+
+    <table id="disp">
+
+
+    </table>
+
+    <div id="btns"></div>
+    <!-- html code end here -->
+
+    <!-- script start here -->
+    <script>
+        let jsn;
+        let x;
+        let pagesize;
+        function abc(){
+            // alert("hello")
+            fetch("https://jsonplaceholder.typicode.com/photos").then(y => y.json()).then(y => {
+            pagesize = document.getElementById("pagesize").value;
+            console.log(y);
+            jsn = y;
+            x = y.length;
+            dis(y, 0, pagesize);
+            // console.log(pagesize);
+            
+        })
+    }
+    const dis = (data,s,e) => {
+        let z = data.slice(s,e).map((v) => {
+            return `<tr><td>${v.albumId}</td><td>${v.id}</td><td>${v.title}</td><td>${v.url}</td><td>${v.thumbnailUrl}</td></tr>`
+        })
+        // console.log(z);
+        document.getElementById("disp").innerHTML = z.join(" ")
+        displaybutton();
+        }
+
+        function displaybutton() {
+            alert(pagesize)
+            let numberOfButton = x / pagesize;
+
+            for (i = 1; i <= numberOfButton; i++) {
+                s = (i - 1) * pagesize;
+                e = s + pagesize;
+                document.getElementById("btns").innerHTML += `<button onclick="displaycomment(${jsn},${s},${e})">${i}</button>`
+            }
+        }
+    </script>
+    <!-- script end here -->
+
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label for="firstName">firstName</label>
+        <input type="text" id="firstName" name="firstNamee" onblur="myValue(event)" placeholder="Enter your firstName">
+        <span id="firstNamee"></span>
+    </div>
+    <div>
+        <label for="lastName">lastName</label>
+        <input type="text" id="lastName" name="lastNamee" onblur="myValue(event)" placeholder="Enter your lastName">
+        <span id="lastNamee"></span>
+    </div>
+    <div>
+        <label for="title">title</label>
+        <input type="text" id="title" name="titlee" placeholder="Enter your title">
+    </div>
+    <div>
+        <label for="email">email</label>
+        <input type="text" id="email" name="emaill" onblur="myValue(event)" placeholder="Enter your email">
+        <span id="emaill"></span>
+    </div>
+    <div>
+        <label for="password">password</label>
+        <input type="text" id="password" placeholder="Enter your password">
+    </div>
+    <div>
+        <label for="confirmPassword">confirmPassword</label>
+        <input type="text" id="confirmPassword" placeholder="Enter your confirmPassword">
+    </div>
+    <div>
+        <input type="checkbox" id="checkbox">
+    </div>
+    <div>
+        <button onclick="regi()">Registratone</button>
+    </div>
+    <script>
+        document.getElementById("password").addEventListener("paste",function(event){
+            event.preventDefault();
+        });
+        document.getElementById("password").addEventListener("copy",function(event){
+            event.preventDefault();
+        })
+        function myValue(event){
+            let name = event.target.name;
+            let value = event.target.value;
+
+            switch(name){
+                case "firstNamee" :
+                if(!value){
+                    document.getElementById(name).innerHTML = "First name is compulsory"
+                }
+                else if(value.match(/[0-9!@#$%^&*()]/g)){
+                    document.getElementById(name).innerHTML = "First name include unwanted cherecter"
+                }
+                else{
+                    document.getElementById(name).innerHTML = " "
+                }
+                break;
+                case "lastNamee" :
+                if(!value){
+                    document.getElementById(name).innerHTML = "Last name is compulsory"
+                }
+                else if(value.match(/[0-9!@#$%^&*()]/g)){
+                    document.getElementById(name).innerHTML = "Last name include unwanted cherecter"
+                }
+                else{
+                    document.getElementById(name).innerHTML = " "
+                }
+                break;
+                case "emaill" :
+                if(!value){
+                    document.getElementById(name).innerHTML = "Email is compulsory"
+                }
+                else{
+                    document.getElementById(name).innerHTML = " "
+                }
+                break;
+            }
+        }
+        const regi = () => {
+            let obj = {
+                "firstName": document.getElementById("firstName").value,
+                "title": document.getElementById("title").value,
+                "lastName": document.getElementById("lastName").value,
+                "email": document.getElementById("email").value,
+                "password": document.getElementById("password").value,
+                "confirmPassword": document.getElementById("confirmPassword").value,
+                "acceptTerms": document.getElementById("checkbox").checked
+            }
+            fetch("https://real-pear-fly-kilt.cyclic.app/accounts/register", {
+                method: "POST",
+                body: JSON.stringify(obj),
+                headers: {
+                    'Content-Type': "application/json"
+                }
+            }).then(y => y.json()).then(y => {
+                console.log(y);
+            })
+        }
+    </script>
+</body>
+
+</html>

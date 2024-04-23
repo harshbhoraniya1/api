@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table class="disp"></table>
+    
+    <script>
+        fetch("https://jsonplaceholder.typicode.com/posts").then(y=>y.json()).then(y=>{
+            console.log(y);
+            disp(y);
+        })
+        const disp = (data)=>{
+            let x = data.map((v)=>{
+                return `<tr><td>${v.id}</td><td>${v.title}</td><td><button onclick="deleteInfo(${v.id})">Delete</button></td></tr>`
+            })
+            document.querySelector(".disp").innerHTML = x.join(" ")
+        }
+        const deleteInfo = (id) => {
+            alert(id)
+            fetch("https://jsonplaceholder.typicode.com/posts" + id, {
+                method: "Delete",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer" 
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

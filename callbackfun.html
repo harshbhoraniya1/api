@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+<div style="display: flex;">
+    <div style="margin-right: 10px;">
+        <input type="text" id="searchCom">
+        <button onclick="searchInCom()">Search</button>
+        <table id="displayForComment" border="1px"></table>
+    </div>
+    <div>
+        <input type="text" id="searchPost">
+        <button onclick="searchInPost()">Search</button>
+        <table id="displayForPost" border="1px"></table>
+    </div>
+</div>
+
+<script>
+    let jsn1;
+    let jsn2;
+    const callAPI = (url,display) =>{
+        fetch(url).then(y=>y.json()).then(y=>{
+            console.log(y);
+            // jsn = y;
+            display(y)
+        })
+    }
+    const displayForComments = (data) =>{
+        jsn1 = data
+        let x = data.map((value) => {
+            return`<tr><td>${value.email}</td></tr>`
+        })
+        document.querySelector("#displayForComment").innerHTML = x.join("")
+    }
+    const displayForPosts = (data) =>{
+        jsn2 = data
+        let x = data.map((value) => {
+            return`<tr><td>${value.body}</td></tr>`
+        })
+        document.querySelector("#displayForPost").innerHTML = x.join("")
+    }
+    callAPI("https://jsonplaceholder.typicode.com/comments",displayForComments)
+    callAPI("https://jsonplaceholder.typicode.com/posts",displayForPosts)
+    const searchInCom = ()=>{
+        let searchCom = document.getElementById("searchCom").value;
+        const x = jsn1.filter((value)=>{
+            return value.email.includes(searchCom)
+        })
+        console.log(jsn1);
+        displayForComments(x);
+    }
+    const searchInPost = ()=>{
+        let searchPost = document.getElementById("searchPost").value;
+        const x = jsn2.filter((value)=>{
+            return value.body.includes(searchPost)
+        })
+        console.log(jsn2);
+        displayForPosts(x);
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="name" placeholder="Enter your name">
+    <input type="text" class="cont" placeholder="Enter your number">
+    <button onclick="sub()">Submit</button>
+    <button onclick="dis(o)">Display</button>
+    <table id="dis"></table>
+
+    <script>
+        let obj
+        let o = JSON.parse(localStorage.getItem("employ")) || [];
+        let ind = -1;
+        function sub(){
+             obj = 
+                {
+                    "name" : document.querySelector(".name").value,
+                    "number" : document.querySelector(".cont").value
+                }
+                if(ind>=0){
+                    o.splice(ind,1,obj)
+                }
+                else{
+                    o.push(obj);
+                }
+                dis(o);
+                localStorage.setItem("employ",JSON.stringify(o));
+        }
+        function dis(k){
+            let x = k.map((v,index)=>{
+                return `<tr><td>${v.name}</td><td>${v.number}</td><td><button onclick="del(${index})">Delete</button><button onclick="edit(${index})">Edit</button></td></tr>`
+            })
+            document.getElementById("dis").innerHTML = x.join("")
+        }
+        function del(index){
+            o.splice(index,1)
+        dis(o);
+        localStorage.setItem("employ",JSON.stringify(o));
+        }
+        function edit(index){
+            ind = index
+            document.querySelector(".name").value = o[index].name
+            document.querySelector(".cont").value = o[index].number
+            dis(o);
+            localStorage.setItem("employ",JSON.stringify(o));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="name">
+    <input type="text" id="contectNumber">
+    <button onclick="submit()">Submit</button>
+    <button onclick="dis()">dis</button>
+    <table id="dis">
+
+    </table>
+
+    <script>
+        let o = JSON.parse(localStorage.getItem("employ")) || []
+        function submit(){
+            const obj = {
+                "name":document.getElementById("name").value,
+                "contectNumber":document.getElementById("contectNumber").value
+            }
+            o.push(obj)
+            localStorage.setItem("employ",JSON.stringify(o));
+        }
+        function dis(){
+            let x = o.map((v)=>{
+                return `<tr><td>${v.name}</td><td>${v.contectNumber}</td></tr>`
+            })
+            document.getElementById("dis").innerHTML = x.join("")
+        }
+    </script>
+</body>
+</html>

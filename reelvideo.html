@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #container {
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(50, 50, 50);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <video muted src="video/@motivational_videos_official_... more.mp4" height="550px"></video>
+        <video muted
+            src="video/Apni_Khushi_Ke_Khaatir_Yeh_Zaroor_Karo_-_Positivity_Ka_Asar_-_BeerBiceps___Ranveer_Allahbadia_Shorts(1080p).mp4"
+            height="550px"></video>
+        <video muted src="video/@motivational_videos_official_... more.mp4" height="550px"></video>
+        <video muted
+            src="video/Apni_Khushi_Ke_Khaatir_Yeh_Zaroor_Karo_-_Positivity_Ka_Asar_-_BeerBiceps___Ranveer_Allahbadia_Shorts(1080p).mp4"
+            height="550px"></video>
+        <video muted src="video/@motivational_videos_official_... more.mp4" height="550px"></video>
+        <video muted
+            src="video/Apni_Khushi_Ke_Khaatir_Yeh_Zaroor_Karo_-_Positivity_Ka_Asar_-_BeerBiceps___Ranveer_Allahbadia_Shorts(1080p).mp4"
+            height="550px"></video>
+    </div>
+
+    <script>
+        let video = document.getElementById("container");
+
+        video.addEventListener("mouseover",function(v){
+            if(v.target.tagName === 'VIDEO'){
+                v.target.play();
+            }
+        })
+        video.addEventListener("mouseout",function(v){
+            if(v.target.tagName === 'VIDEO'){
+                v.target.pause();
+            }
+        })
+    </script>
+</body>
+
+</html>

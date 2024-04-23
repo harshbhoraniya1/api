@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video muted controls src="video/@motivational_videos_official_... more.mp4" height="550px" id="video"></video>
+
+    <script>
+      let video = document.getElementById("video")
+
+      video.addEventListener("pause",function(v){
+        sessionStorage.setItem("time",v.target.currentTime)
+      })
+      video.addEventListener("play",function(v){
+        let t = sessionStorage.getItem("time");
+        v.target.currentTime = t
+      })
+
+    </script>
+</body>
+</html>

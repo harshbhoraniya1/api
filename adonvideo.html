@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <video muted controls autoplay
+        src="video/Apni_Khushi_Ke_Khaatir_Yeh_Zaroor_Karo_-_Positivity_Ka_Asar_-_BeerBiceps___Ranveer_Allahbadia_Shorts(1080p).mp4"
+        height="550px" id="videos"></video>
+
+    <script>
+        let video = document.getElementById("videos")
+        let a;
+        video.addEventListener("playing", function (v) {
+            console.log(v.srcElement.src);
+            a = setInterval(function () {
+                sessionStorage.setItem("time", v.target.currentTime)
+
+            }, 1000)
+
+        })
+
+        let d;
+        video.addEventListener("playing", function (v) {
+            d = setInterval(function () {
+                let b = sessionStorage.getItem("time")
+                if (Math.trunc(b) == 10 || v.srcElement.src == "video/Apni_Khushi_Ke_Khaatir_Yeh_Zaroor_Karo_-_Positivity_Ka_Asar_-_BeerBiceps___Ranveer_Allahbadia_Shorts(1080p).mp4") {
+                    document.getElementById("videos").src = "video/@motivational_videos_official_... more.mp4"
+                }
+            }, 1000)
+
+        })
+
+        video.addEventListener("pause", function () {
+            clearInterval(a);
+            clearInterval(d);
+
+        })
+    </script>
+</body>
+
+</html>

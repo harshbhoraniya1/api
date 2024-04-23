@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="name" placeholder="name">
+    <input type="text" id="contactnumber" placeholder="contactnumber">
+    <button onclick="show()">submit</button>
+    <button onclick="display()">display</button>
+    <table id="dis"></table>
+    <script>
+        
+        let obj
+        let o = JSON.parse(localStorage.getItem("employee")) || [];
+        function show()
+        {
+             obj = {
+                "name" : document.getElementById("name").value,
+                "contactnumber" : document.getElementById("contactnumber").value
+            }
+            o.push(obj);
+            localStorage.setItem("employee",JSON.stringify(o));
+        }
+       
+        function display(){
+           
+       let p = o.map(function(v,index)
+        {
+            return `<tr><td>${v.name}</td><td>${v.contactnumber}</td><td><button onclick="Delete(${index})">Delete</button></td><td><button onclick="edit(${index})">Edit</button></td></tr>`
+        })
+        document.getElementById("dis").innerHTML = p.join("");
+            }
+
+            function Delete(index){
+                o.splice(index,1)
+                display();
+                localStorage.setItem("employee",JSON.stringify(o));
+            }
+
+            function edit(index){
+                let ind = -1;
+                if(ind>=0)
+        {
+            // todoItems.splice(ind,1,item)
+            o[ind] = obj;
+        }
+        else{
+            o.push(obj);
+        }
+        ind = index;
+        obj = o[index]
+        display();
+        localStorage.setItem("employee",JSON.stringify(o));
+            }
+    </script>
+    
+</body>
+</html>
